@@ -40,4 +40,4 @@ with open(name,'w') as f:
         tem = v.__str__()
         f.write(tem)
 
-print(f"Done of {name} \n")
+print(f"Done of {name}  \n")
