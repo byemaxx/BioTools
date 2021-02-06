@@ -37,7 +37,7 @@ def open_page(driver , theme):
     print(f"共找到 {res_unm} 条结果, {page_unm} 页。")
     return res_unm
 
-def crawl(driver, papers_need):
+def crawl(driver, papers_need, theme):
     # 赋值序号, 控制爬取的文章数量
     count = 1
    
@@ -87,7 +87,7 @@ def crawl(driver, papers_need):
                 # 写入文件
                 res = f"{count}\t{title}\t{authors}\t{institute}\t{date}\t{source}\t{database}\t{keywords}\t{abstract}\t{url}".replace("\n","")+"\n"
                 print(res)
-                with open('CNKI_res.tsv', 'a', encoding='gbk') as f:
+                with open(f'CNKI_{theme}.tsv', 'a', encoding='gbk') as f:
                     f.write(res)
 
             except:
@@ -129,7 +129,7 @@ def main():
     res_unm =  int(open_page(driver, theme))
     # 判断所需是否大于总篇数
     papers_need = papers_need if (papers_need <= res_unm) else res_unm
-    crawl(driver, papers_need)
+    crawl(driver, papers_need, theme)
 
     # 关闭浏览器
     driver.close()
